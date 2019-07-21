@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonService } from '../../services/contact.service';
-import { Person } from '../../model/person.model';
-import { ToastrService } from 'ngx-toastr';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
+import { ToastrService } from 'ngx-toastr';
+
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../model/product.model';
+
 @Component({
-  selector: 'app-contact-list',
+  selector: 'app-product-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   faTrashAlt = faTrashAlt;
-  constructor(private service: PersonService, private toastr: ToastrService) {}
+
+  constructor(private service: ProductService, private toastr: ToastrService) {}
 
   ngOnInit() {}
 
-  onEdit(emp: Person): void {
+  onEdit(emp: Product): void {
     this.service.formData = Object.assign({}, emp);
   }
 
   onDelete(id: string): void {
-    this.service.deleteContact(id);
+    this.service.deleteProduct(id);
     this.toastr.warning('Successfully Deleted Record.');
   }
 }

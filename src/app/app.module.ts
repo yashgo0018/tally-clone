@@ -20,6 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 
 import { firebase } from './../environments/firebase';
+import { ProductAddComponent } from './product/add/add.component';
+import { ProductListComponent } from './product/list/list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { firebase } from './../environments/firebase';
     ProductComponent,
     TransactionComponent,
     ListComponent,
-    AddComponent
+    AddComponent,
+    ProductAddComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

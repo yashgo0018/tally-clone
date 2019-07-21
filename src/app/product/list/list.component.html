@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Cost</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of service.products">
+      <td (click)="onEdit(product)">{{ product.name }}</td>
+      <td (click)="onEdit(product)">{{ product.quantity }}</td>
+      <td (click)="onEdit(product)">{{ product.cost }}</td>
+      <td>
+        <a class="btn text-danger" (click)="onDelete(product.id)"
+          ><fa-icon [icon]="faTrashAlt"></fa-icon
+        ></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,4 @@
-import { Person } from '../model/person';
+import { Person } from '../model/person.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
