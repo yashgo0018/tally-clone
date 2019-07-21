@@ -33,15 +33,12 @@ export class AddComponent implements OnInit {
     };
   }
   onSubmit(form: NgForm): void {
-    const data = Object.assign({}, form.value);
-    delete data.id;
-    if (form.value.id == null || form.value.id === '') {
-      console.log(data);
-      this.firestore.collection('person').add(data);
+    const isDone = this.service.writeContact(form.value);
+    if (isDone) {
+      this.resetForm(form);
+      this.toastr.success('Submitted Successfully.');
     } else {
-      this.firestore.doc(`person/${form.value.id}`).update(data);
+      this.toastr.warning('Some Error Occured');
     }
-    this.resetForm(form);
-    this.toastr.success('Submitted Successfully.');
   }
 }
