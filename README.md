@@ -2,9 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.
 
-## Development server
+## Get Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Steps to get started:-
+
+* Make a file src/environments/firebase.ts and add your firebase credentials in that file:- 
+
+    `export const firebase = {your credentials}`
+
+* Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+And You are done.
 
 ## Code scaffolding
 
