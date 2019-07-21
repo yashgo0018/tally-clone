@@ -10,20 +10,11 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  contacts: Person[];
   faTrashAlt = faTrashAlt;
   constructor(private service: PersonService, private toastr: ToastrService) {}
 
-  ngOnInit() {
-    this.service.getContacts().subscribe(actionArray => {
-      this.contacts = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
-        } as Person;
-      });
-    });
-  }
+  ngOnInit() {}
+
   onEdit(emp: Person): void {
     this.service.formData = Object.assign({}, emp);
   }

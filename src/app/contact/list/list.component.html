@@ -6,7 +6,7 @@
     <th></th>
   </thead>
   <tbody>
-    <tr *ngFor="let contact of contacts">
+    <tr *ngFor="let contact of service.contacts">
       <td (click)="onEdit(contact)">{{ contact.name }}</td>
       <td (click)="onEdit(contact)">{{ contact.role }}</td>
       <td (click)="onEdit(contact)">{{ contact.mobile }}</td>
