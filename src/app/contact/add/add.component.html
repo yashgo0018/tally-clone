@@ -1,0 +1,78 @@
+<h1 class="display-4">Add A Contact</h1>
+
+<form #form="ngForm" [autocomplete]="false" (submit)="onSubmit(form)">
+  <input
+    type="hidden"
+    name="id"
+    #id="ngModel"
+    [(ngModel)]="service.formData.id"
+  />
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="name"
+      #name="ngModel"
+      [(ngModel)]="service.formData.name"
+      placeholder="Name"
+      required
+    />
+    <div *ngIf="name.invalid && name.touched" class="validation-error">
+      This Field is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      class="form-control"
+      name="email"
+      #email="ngModel"
+      [(ngModel)]="service.formData.email"
+      placeholder="Email"
+    />
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <select
+        name="role"
+        class="form-control"
+        #role="ngModel"
+        [(ngModel)]="service.formData.role"
+        required
+      >
+        <option selected value="Buyer">Buyer</option>
+        <option value="Seller">Seller</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <input
+        class="form-control"
+        name="mobile"
+        #mobile="ngModel"
+        [(ngModel)]="service.formData.mobile"
+        placeholder="Mobile"
+        required
+      />
+      <div *ngIf="mobile.invalid && mobile.touched" class="validation-error">
+        This Field is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <textarea
+      class="form-control"
+      name="address"
+      #address="ngModel"
+      [(ngModel)]="service.formData.address"
+      placeholder="Address"
+    >
+    </textarea>
+  </div>
+  <div class="form-group">
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="btn btn-lg btn-block btn-info"
+    >
+      SUBMIT
+    </button>
+  </div>
+</form>

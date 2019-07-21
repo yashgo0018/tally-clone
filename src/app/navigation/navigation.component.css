@@ -1,0 +1,7 @@
+.nav-item {
+  border-radius: 10px;
+  display: block;
+  text-align: center;
+  max-width: 300px;
+  align-self: center;
+}
