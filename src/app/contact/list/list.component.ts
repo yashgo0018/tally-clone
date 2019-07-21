@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-contact-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })

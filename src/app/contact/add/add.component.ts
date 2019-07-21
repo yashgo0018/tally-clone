@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-contact-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
