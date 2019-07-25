@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
-import { PersonService } from '../../services/contact.service';
+import { ContactService } from '../../services/contact.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  constructor(private service: PersonService, private toastr: ToastrService) {}
+  constructor(private service: ContactService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.resetForm();
