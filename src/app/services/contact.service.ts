@@ -1,13 +1,16 @@
-import { Person } from '../model/person.model';
+import { Contact } from '../model/contact.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
-  formData: Person;
-  contacts: Person[];
+export class ContactService {
+  formData: Contact;
+
+  contacts: Contact[];
+  buyers: Contact[];
+  sellers: Contact[];
 
   constructor(private firestore: AngularFirestore) {
     this.getContacts().subscribe(actionArray => {
@@ -15,9 +18,10 @@ export class PersonService {
         return {
           id: item.payload.doc.id,
           ...item.payload.doc.data()
-        } as Person;
+        } as Contact;
       });
-      console.log(this.contacts);
+      this.buyers = this.contacts.filter(val => val.role === 'Buyer');
+      this.sellers = this.contacts.filter(val => val.role === 'Seller');
     });
   }
 
@@ -29,7 +33,7 @@ export class PersonService {
     this.firestore.doc(`contact/${id}`).delete();
   }
 
-  writeContact(contact: Person) {
+  writeContact(contact: Contact) {
     const data = Object.assign({}, contact);
     delete data.id;
     if (contact.id == null || contact.id === '') {
