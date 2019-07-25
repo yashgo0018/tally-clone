@@ -16,7 +16,6 @@ export class ProductService {
           ...item.payload.doc.data()
         } as Product;
       });
-      console.log(this.products);
     });
   }
 
