@@ -37,4 +37,8 @@ export class ProductService {
     }
     return true;
   }
+
+  getProductFromString(name: string): Product {
+    return this.products.filter(val => val.name === name)[0];
+  }
 }
