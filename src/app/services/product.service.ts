@@ -23,8 +23,12 @@ export class ProductService {
     return this.firestore.collection('product').snapshotChanges();
   }
 
-  deleteProduct(id: string) {
-    this.firestore.doc(`product/${id}`).delete();
+  getProduct(id: string) {
+    return this.products.filter(val => val.id === id)[0];
+  }
+
+  getProductFromString(name: string): Product {
+    return this.products.filter(val => val.name === name)[0];
   }
 
   writeProduct(product: Product) {
@@ -38,7 +42,19 @@ export class ProductService {
     return true;
   }
 
-  getProductFromString(name: string): Product {
-    return this.products.filter(val => val.name === name)[0];
+  deleteProduct(id: string) {
+    this.firestore.doc(`product/${id}`).delete();
+  }
+
+  addStock(id: string, quantity: number) {
+    const product = this.getProduct(id);
+    product.quantity += quantity;
+    this.writeProduct(product);
+  }
+
+  subtractStock(id: string, quantity: number) {
+    const product = this.getProduct(id);
+    product.quantity -= quantity;
+    this.writeProduct(product);
   }
 }
