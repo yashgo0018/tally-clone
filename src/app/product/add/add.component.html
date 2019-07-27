@@ -33,6 +33,7 @@
         [(ngModel)]="service.formData.quantity"
         placeholder="Quantity"
         required
+        type="number"
       />
       <div
         *ngIf="quantity.invalid && quantity.touched"
@@ -50,6 +51,7 @@
         [(ngModel)]="service.formData.cost"
         placeholder="Cost"
         required
+        type="number"
       />
       <div *ngIf="cost.invalid && cost.touched" class="validation-error">
         This Field is required.
