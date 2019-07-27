@@ -1,0 +1,18 @@
+<table class="table my-4">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Seller Name</th>
+      <th>Type</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactionService.transactions; index as i">
+      <td>{{ transaction.date.toDate().toDateString() }}</td>
+      <td>{{ transaction.name.name }}</td>
+      <td>{{ transaction.type }}</td>
+      <td>{{ transaction.total }}</td>
+    </tr>
+  </tbody>
+</table>

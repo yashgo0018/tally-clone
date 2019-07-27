@@ -1,0 +1,135 @@
+<h1 class="display-4">Add A {{ type }}</h1>
+
+<form #form="ngForm" [autocomplete]="false" (submit)="onSubmit(form)">
+  <input
+    type="hidden"
+    name="id"
+    #id="ngModel"
+    [(ngModel)]="transactionService.formData.id"
+  />
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="">{{ role }} Name</label>
+      <select
+        name="name"
+        #name="ngModel"
+        [(ngModel)]="transactionService.formData.name.name"
+        required
+        class="form-control"
+      >
+        <option
+          *ngFor="
+            let contact of role === 'Seller'
+              ? contactService.sellers
+              : contactService.buyers
+          "
+          [value]="contact.name"
+          class="form-control"
+        >
+          {{ contact.name }}
+        </option>
+      </select>
+      <div *ngIf="name.invalid && name.touched" class="validation-error">
+        This Field is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <table class="table my-4">
+      <thead>
+        <tr>
+          <th>S No.</th>
+          <th>Product Name</th>
+          <th>Cost</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let product of transactionService.formData.products;
+            index as i
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>
+            <a (click)="editProduct(product)">{{ product.name }}</a>
+          </td>
+          <td>{{ product.cost }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.quantity * product.cost }}</td>
+        </tr>
+      </tbody>
+      <tr>
+        <td>{{ transactionService.formData.products.length + 1 }}</td>
+        <td>
+          <select
+            (change)="productChanged()"
+            name="productName"
+            #productName="ngModel"
+            [(ngModel)]="product.name"
+            class="form-control"
+          >
+            <option
+              [value]="item.name"
+              *ngFor="let item of productService.products"
+              >{{ item.name }}</option
+            >
+          </select>
+        </td>
+
+        <td>
+          <input
+            type="text"
+            name="productCost"
+            #productCost="ngModel"
+            class="form-control"
+            [(ngModel)]="product.cost"
+            type="number"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            class="form-control"
+            name="productQuantity"
+            #productQuantity="ngModel"
+            [(ngModel)]="product.quantity"
+          />
+        </td>
+        <td>{{ product.cost * product.quantity }}</td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <div class="row">
+            <div class="text-light col-md-6">
+              <a
+                (click)="addProduct()"
+                class="btn btn-warning btn-block btn-large"
+              >
+                Add Product
+              </a>
+            </div>
+            <div class="text-light col-md-6">
+              <a
+                (click)="resetProductForm()"
+                class="btn btn-danger btn-block btn-large"
+              >
+                Clear Form
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="form-group">
+    <a
+      (click)="onSubmit(form)"
+      class="btn btn-lg btn-block text-light btn-info"
+    >
+      SUBMIT
+    </a>
+  </div>
+</form>

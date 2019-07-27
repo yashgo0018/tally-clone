@@ -9,9 +9,13 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductComponent } from './product/product.component';
-import { TransactionComponent } from './transaction/transaction.component';
+import { ProductAddComponent } from './product/add/add.component';
+import { ProductListComponent } from './product/list/list.component';
 import { ListComponent } from './contact/list/list.component';
 import { AddComponent } from './contact/add/add.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionAddComponent } from './transaction/add/add.component';
+import { TransactionListComponent } from './transaction/list/list.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -20,21 +24,25 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 
 import { firebase } from './../environments/firebase';
-import { ProductAddComponent } from './product/add/add.component';
-import { ProductListComponent } from './product/list/list.component';
+
+import { ContactService } from './services/contact.service';
+import { ProductService } from './services/product.service';
+import { TransactionService } from './services/transaction.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavigationComponent,
-    HeaderComponent,
-    ContactComponent,
-    ProductComponent,
-    TransactionComponent,
-    ListComponent,
     AddComponent,
+    AppComponent,
+    ContactComponent,
+    HeaderComponent,
+    ListComponent,
+    NavigationComponent,
+    ProductComponent,
     ProductAddComponent,
-    ProductListComponent
+    ProductListComponent,
+    TransactionComponent,
+    TransactionAddComponent,
+    TransactionListComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,7 @@ import { ProductListComponent } from './product/list/list.component';
     ToastrModule.forRoot(),
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [ContactService, ProductService, TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
