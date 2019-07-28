@@ -45,16 +45,4 @@ export class ProductService {
   deleteProduct(id: string) {
     this.firestore.doc(`product/${id}`).delete();
   }
-
-  addStock(id: string, quantity: number) {
-    const product = this.getProduct(id);
-    product.quantity += quantity;
-    this.writeProduct(product);
-  }
-
-  subtractStock(id: string, quantity: number) {
-    const product = this.getProduct(id);
-    product.quantity -= quantity;
-    this.writeProduct(product);
-  }
 }
