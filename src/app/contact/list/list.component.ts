@@ -11,7 +11,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListComponent implements OnInit {
   faTrashAlt = faTrashAlt;
-  constructor(private service: ContactService, private toastr: ToastrService) {}
+  constructor(public service: ContactService, private toastr: ToastrService) {}
 
   ngOnInit() {}
 

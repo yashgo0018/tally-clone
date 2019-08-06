@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /transaction/{id} {
+    	allow read;
+      allow create, update: if checkTransaction(request.resource.data);
+      allow delete;
+    }
+    
+    match /product/{id} {
+    	allow read;
+      allow delete;
+      allow create, update: if checkProduct(request.resource.data);
+    }
+    
+    match /contact/{id} {
+   	 	allow read;
+      allow delete;
+      allow create, update: if checkContact(request.resource.data);
+    }
+  }
+  
+  function checkTransaction(data){
+    return data.name != '' && data.products != [];
+  }
+  
+  function checkProduct(data) {
+  	return data.quantity >= 0 && data.name != '';
+  }
+  
+  function checkContact(data) {
+  	return data.email != '' && data.name != '' && data.role != '' && data.address != [];
+  }
+}

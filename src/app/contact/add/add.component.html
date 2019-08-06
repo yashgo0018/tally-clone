@@ -1,6 +1,6 @@
 <h1 class="display-4">Add A Contact</h1>
 
-<form #form="ngForm" [autocomplete]="false" (submit)="onSubmit(form)">
+<form #form="ngForm" [autocomplete]="false">
   <input
     type="hidden"
     name="id"
@@ -57,22 +57,34 @@
     </div>
   </div>
   <div class="form-group">
-    <textarea
+    <input
+      type="text"
+      class="form-control mb-2"
+      name="add1"
+      #add1="ngModel"
+      [(ngModel)]="service.formData.address[0]"
+      placeholder="Address Line 1*"
+      required
+    /><input
+      type="text"
+      name="add2"
+      #add2="ngModel"
+      class="form-control mb-2"
+      [(ngModel)]="service.formData.address[1]"
+      placeholder="Address Line 2*"
+      required
+    /><input
+      type="text"
+      name="add3"
+      #add3="ngModel"
       class="form-control"
-      name="address"
-      #address="ngModel"
-      [(ngModel)]="service.formData.address"
-      placeholder="Address"
-    >
-    </textarea>
+      [(ngModel)]="service.formData.address[2]"
+      placeholder="Address Line 3"
+    />
   </div>
   <div class="form-group">
-    <button
-      type="submit"
-      [disabled]="form.invalid"
-      class="btn btn-lg btn-block btn-info"
-    >
+    <a class="btn btn-lg btn-block btn-info" (click)="onSubmit()">
       SUBMIT
-    </button>
+    </a>
   </div>
 </form>

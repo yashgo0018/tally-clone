@@ -4,5 +4,5 @@ export class Contact {
   role: string;
   mobile?: string;
   email?: string;
-  address?: string;
+  address?: Array<string>;
 }

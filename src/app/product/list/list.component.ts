@@ -14,7 +14,7 @@ import { Product } from '../../model/product.model';
 export class ProductListComponent implements OnInit {
   faTrashAlt = faTrashAlt;
 
-  constructor(private service: ProductService, private toastr: ToastrService) {}
+  constructor(public service: ProductService, private toastr: ToastrService) {}
 
   ngOnInit() {}
 

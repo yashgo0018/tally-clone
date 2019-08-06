@@ -13,8 +13,9 @@
       <select
         name="name"
         #name="ngModel"
-        [(ngModel)]="transactionService.formData.name.name"
+        [(ngModel)]="transactionService.formData.name"
         required
+        (change)="contactChanged()"
         class="form-control"
       >
         <option
@@ -23,7 +24,7 @@
               ? contactService.sellers
               : contactService.buyers
           "
-          [value]="contact.name"
+          [value]="contact.id"
           class="form-control"
         >
           {{ contact.name }}

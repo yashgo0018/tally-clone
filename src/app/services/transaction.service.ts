@@ -39,15 +39,19 @@ export class TransactionService {
     this.firestore.doc(`transaction/${id}`).delete();
   }
 
-  writeTransaction(transaction: Transaction) {
+  async writeTransaction(transaction: Transaction) {
     const data = Object.assign({}, transaction);
     delete data.id;
-
     if (transaction.id == null || transaction.id === '') {
-      this.firestore.collection('transaction').add(data);
+      return this.firestore.collection('transaction').add(data);
     } else {
-      this.firestore.doc(`transaction/${transaction.id}`).update(data);
+      return this.firestore.doc(`transaction/${transaction.id}`).update(data);
     }
-    return true;
+  }
+
+  transactionAfter(timestamp: Date) {
+    return this.transactions.filter(
+      val => val.date.seconds > timestamp.getTime() / 1000
+    );
   }
 }

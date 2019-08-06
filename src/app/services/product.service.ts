@@ -31,15 +31,14 @@ export class ProductService {
     return this.products.filter(val => val.name === name)[0];
   }
 
-  writeProduct(product: Product) {
+  async writeProduct(product: Product) {
     const data = Object.assign({}, product);
     delete data.id;
     if (product.id == null || product.id === '') {
-      this.firestore.collection('product').add(data);
+      return this.firestore.collection('product').add(data);
     } else {
-      this.firestore.doc(`product/${product.id}`).update(data);
+      return this.firestore.doc(`product/${product.id}`).update(data);
     }
-    return true;
   }
 
   deleteProduct(id: string) {

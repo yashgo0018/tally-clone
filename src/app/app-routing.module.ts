@@ -5,6 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ProductComponent } from './product/product.component';
 import { TransactionAddComponent } from './transaction/add/add.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [
   { path: '', component: NavigationComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'transaction', component: TransactionComponent },
   { path: 'purchase', component: TransactionAddComponent },
-  { path: 'sell', component: TransactionAddComponent }
+  { path: 'sell', component: TransactionAddComponent },
+  { path: 'report', component: ReportComponent }
 ];
 
 @NgModule({

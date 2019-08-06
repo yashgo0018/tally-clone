@@ -1,0 +1,7 @@
+.nav-link.active:hover {
+  color: white;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+}

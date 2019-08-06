@@ -1,34 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product.service';
-import { TransactionService } from 'src/app/services/transaction.service';
-import { ContactService } from '../../services/contact.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Product } from '../../model/product.model';
+import { Router } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
+
+import { ContactService } from 'src/app/services/contact.service';
+import { ProductService } from 'src/app/services/product.service';
+import { TransactionService } from 'src/app/services/transaction.service';
+import { Product } from 'src/app/model/product.model';
 
 @Component({
   selector: 'app-transaction-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
-export class TransactionAddComponent implements OnInit {
+export class TransactionAddComponent implements OnInit, OnDestroy {
   product: Product;
   role: string;
   type: string;
 
   constructor(
-    private productService: ProductService,
-    private transactionService: TransactionService,
-    private contactService: ContactService,
-    private toastrService: ToastrService,
-    private router: Router
+    public productService: ProductService,
+    public transactionService: TransactionService,
+    public contactService: ContactService,
+    public toastrService: ToastrService,
+    public router: Router
   ) {}
 
   ngOnInit() {
     this.role = this.router.url.split('/')[1] === 'sell' ? 'Buyer' : 'Seller';
     this.type = this.role === 'Seller' ? 'Purchase' : 'Sale';
-    this.resetForm();
+    if (this.transactionService.formData === undefined) {
+      this.resetForm();
+    }
     this.resetProductForm();
   }
 
@@ -38,9 +42,14 @@ export class TransactionAddComponent implements OnInit {
     }
     this.transactionService.formData = {
       id: null,
-      name: {
+      name: '',
+      contact: {
+        id: null,
         name: '',
-        role: this.role
+        email: '',
+        address: ['', '', ''],
+        mobile: '',
+        role: 'Buyer'
       },
       products: [],
       type: this.type,
@@ -63,6 +72,12 @@ export class TransactionAddComponent implements OnInit {
     this.product.cost = product.cost;
   }
 
+  contactChanged() {
+    this.transactionService.formData.contact = this.contactService.getContact(
+      this.transactionService.formData.name
+    );
+  }
+
   addProduct() {
     if (
       this.transactionService.formData.products.filter(
@@ -83,10 +98,14 @@ export class TransactionAddComponent implements OnInit {
     this.transactionService.formData.products.forEach(
       val => (this.transactionService.formData.total += val.cost * val.quantity)
     );
-    this.transactionService.writeTransaction(this.transactionService.formData);
-    this.resetForm(form);
-    this.toastrService.success(`Created A ${this.type}`);
-    this.router.navigate(['/transaction']);
+    this.transactionService
+      .writeTransaction(this.transactionService.formData)
+      .then(() => {
+        this.resetForm(form);
+        this.toastrService.success(`Created A ${this.type}`);
+        this.router.navigate(['/transaction']);
+      })
+      .catch(err => this.toastrService.warning(`You Made A Error`));
   }
 
   editProduct(product: Product) {
@@ -94,5 +113,9 @@ export class TransactionAddComponent implements OnInit {
       val => val.id !== product.id
     );
     this.product = product;
+  }
+
+  ngOnDestroy(): void {
+    this.transactionService.formData = undefined;
   }
 }

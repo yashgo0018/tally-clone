@@ -9,10 +9,12 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  constructor(private service: ContactService, private toastr: ToastrService) {}
+  add: string[] = ['', '', ''];
+  constructor(public service: ContactService, public toastr: ToastrService) {}
 
   ngOnInit() {
     this.resetForm();
+    console.log(this.service.formData);
   }
   resetForm(form?: NgForm) {
     if (form) {
@@ -22,18 +24,32 @@ export class AddComponent implements OnInit {
       id: null,
       name: '',
       email: '',
-      address: '',
+      address: ['', '', ''],
       mobile: '',
       role: 'Buyer'
     };
   }
-  onSubmit(form: NgForm): void {
-    const isDone = this.service.writeContact(form.value);
-    if (isDone) {
-      this.resetForm(form);
-      this.toastr.success('Submitted Successfully.');
-    } else {
-      this.toastr.warning('Some Error Occured');
+  onSubmit(): void {
+    this.service.formData.address = this.service.formData.address
+      .filter(val => val !== '')
+      .map(val => this.clean(val));
+
+    this.service
+      .writeContact(this.service.formData)
+      .then(val => {
+        this.resetForm();
+        this.toastr.success('Submitted Successfully.');
+      })
+      .catch(err => this.toastr.warning('You made an error'));
+  }
+
+  clean(str: string): string {
+    if (str[0] === ' ' || str[0] === ',') {
+      str = str
+        .split('')
+        .slice(1)
+        .join('');
     }
+    return str;
   }
 }

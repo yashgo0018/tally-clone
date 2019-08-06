@@ -1,0 +1,46 @@
+<h1>Report</h1>
+
+<ul class="nav nav-pills justify-content-end">
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: mode == 1 }"
+      (click)="changeMode(1)"
+      >Last 30 Days</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: mode == 2 }"
+      (click)="changeMode(2)"
+      >This Month</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: mode == 3 }"
+      (click)="changeMode(3)"
+      >Last 7 Days</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: mode == 4 }"
+      (click)="changeMode(4)"
+      >This Week</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      [ngClass]="{ active: mode == 5 }"
+      (click)="changeMode(5)"
+      >Today</a
+    >
+  </li>
+</ul>
+
+{{ this.reportService.getAnalytics(this.periods[mode]).profit }}

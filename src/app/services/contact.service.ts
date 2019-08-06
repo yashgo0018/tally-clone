@@ -1,6 +1,7 @@
 import { Contact } from '../model/contact.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Transaction } from '../model/transaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class ContactService {
     });
   }
 
+  getContact(id: string) {
+    return this.contacts.filter(val => val.id === id)[0];
+  }
+
   getContacts() {
     return this.firestore.collection('contact').snapshotChanges();
   }
@@ -33,14 +38,17 @@ export class ContactService {
     this.firestore.doc(`contact/${id}`).delete();
   }
 
-  writeContact(contact: Contact) {
+  async writeContact(contact: Contact) {
     const data = Object.assign({}, contact);
     delete data.id;
     if (contact.id == null || contact.id === '') {
-      this.firestore.collection('contact').add(data);
+      return this.firestore.collection('contact').add(data);
     } else {
-      this.firestore.doc(`contact/${contact.id}`).update(data);
+      return this.firestore.doc(`contact/${contact.id}`).update(data);
     }
-    return true;
+  }
+
+  getContactFromString(name: string): Contact {
+    return this.contacts.filter(val => val.name === name)[0];
   }
 }

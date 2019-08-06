@@ -5,14 +5,38 @@
       <th>Seller Name</th>
       <th>Type</th>
       <th>Total</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let transaction of transactionService.transactions; index as i">
-      <td>{{ transaction.date.toDate().toDateString() }}</td>
-      <td>{{ transaction.name.name }}</td>
-      <td>{{ transaction.type }}</td>
-      <td>{{ transaction.total }}</td>
+      <td>
+        <a (click)="loadTransaction(transaction)">{{
+          transaction.date.toDate().toDateString()
+        }}</a>
+      </td>
+      <td>
+        <a (click)="loadTransaction(transaction)">{{
+          transaction.contact.name
+        }}</a>
+      </td>
+      <td>
+        <a (click)="loadTransaction(transaction)">{{ transaction.type }}</a>
+      </td>
+      <td>
+        <a (click)="loadTransaction(transaction)">{{ transaction.total }}</a>
+      </td>
+
+      <td>
+        <a class="btn text-danger" (click)="download(transaction.id)"
+          ><fa-icon [icon]="faDownload"></fa-icon
+        ></a>
+        <a
+          class="btn text-danger"
+          (click)="transactionService.deleteTransaction(transaction.id)"
+          ><fa-icon [icon]="faTrashAlt"></fa-icon
+        ></a>
+      </td>
     </tr>
   </tbody>
 </table>

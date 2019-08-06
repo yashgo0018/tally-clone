@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add.component.css']
 })
 export class ProductAddComponent implements OnInit {
-  constructor(private service: ProductService, private toastr: ToastrService) {}
+  constructor(public service: ProductService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.resetForm();
@@ -28,12 +28,12 @@ export class ProductAddComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    const isDone = this.service.writeProduct(form.value);
-    if (isDone) {
-      this.resetForm(form);
-      this.toastr.success('Submitted Successfully.');
-    } else {
-      this.toastr.warning('Some Error Occured');
-    }
+    this.service
+      .writeProduct(form.value)
+      .then(val => {
+        this.resetForm(form);
+        this.toastr.success('Submitted Successfully.');
+      })
+      .catch(err => this.toastr.warning('You made an error'));
   }
 }

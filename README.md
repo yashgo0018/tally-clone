@@ -42,7 +42,8 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 - Deploy Your Firebase Functions and Firestore Rules.
 
   ```bash
-    firebase deploy
+    firebase deploy --only functions
+    firebase deploy --only firestore
   ```
 
 #### Test Your Project :-
@@ -62,3 +63,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Deploy Web App to firebase Hosting
+
+Run `npm run deploy` And It will deploy a production version to firebase hosting and you will be running the web app on the firebase.

@@ -5,14 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { HeaderComponent } from './commons/header/header.component';
+import { AddComponent } from './contact/add/add.component';
 import { ContactComponent } from './contact/contact.component';
+import { HeaderComponent } from './commons/header/header.component';
+import { ListComponent } from './contact/list/list.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { ProductComponent } from './product/product.component';
 import { ProductAddComponent } from './product/add/add.component';
 import { ProductListComponent } from './product/list/list.component';
-import { ListComponent } from './contact/list/list.component';
-import { AddComponent } from './contact/add/add.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { TransactionAddComponent } from './transaction/add/add.component';
 import { TransactionListComponent } from './transaction/list/list.component';
@@ -28,6 +28,7 @@ import { firebase } from './../environments/firebase';
 import { ContactService } from './services/contact.service';
 import { ProductService } from './services/product.service';
 import { TransactionService } from './services/transaction.service';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TransactionService } from './services/transaction.service';
     ProductListComponent,
     TransactionComponent,
     TransactionAddComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
