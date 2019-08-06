@@ -4,13 +4,29 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Get Started
 
-Steps to get started:-
+Step Up Firebase Related Stuff:-
 
-* Make a file src/environments/firebase.ts and add your firebase credentials in that file:- 
+- Make a file src/environments/firebase.ts and add your firebase credentials in that file:-
 
-    `export const firebase = {your credentials}`
+  `export const firebase = {your credentials}`
 
-* Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Setup Firebase Functions and Firestore rules:-
+
+- Install [firebase cli client](https://firebase.google.com/docs/cli) and login with your account.
+
+- Make Your Firebase Project in firebase console.
+
+- Make a file firebase/.firebaserc and add the following and replace your-project-name with your project name:-
+
+  `{"projects": {"default": "your-project-name"}}`
+
+- Deploy Your Firebase Functions and Firestore Rules.
+
+  `firebase deploy`
+
+Test Your Project :-
+
+- Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 And You are done.
 
