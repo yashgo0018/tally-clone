@@ -7,9 +7,11 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 #### Install Dependencies
 
 - Install Your Project Dependencies
+
   `npm install`
 
 - Install Firebase Depndencies
+
   `cd firebase/functions`
   `npm install`
 
