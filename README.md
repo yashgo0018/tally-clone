@@ -10,8 +10,8 @@ This is a accounting web app that can serve the purpose of tally. This is develo
   `npm install`
 
 - Install Firebase Depndencies
-  cd firebase/functions
-  npm install
+  `cd firebase/functions`
+  `npm install`
 
 #### Step Up Firebase Related Stuff:-
 
