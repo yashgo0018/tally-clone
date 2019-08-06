@@ -1,6 +1,6 @@
 # TallyClone
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.4.
+This is a accounting web app that can serve the purpose of tally. This is developed with angular and firebase.
 
 ## Get Started
 
