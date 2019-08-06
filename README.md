@@ -4,6 +4,15 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 
 ## Get Started
 
+#### Install Dependencies
+
+- Install Your Project Dependencies
+  `npm install`
+
+- Install Firebase Depndencies
+  cd firebase/functions
+  npm install
+
 #### Step Up Firebase Related Stuff:-
 
 - Make a file src/environments/firebase.ts and add your firebase credentials in that file:-
