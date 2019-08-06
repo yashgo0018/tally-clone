@@ -8,7 +8,9 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 
 - Install Your Project Dependencies
 
-  `npm install`
+  ```bash
+    npm install
+  ```
 
 - Install Firebase Depndencies
 
@@ -21,7 +23,9 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 
 - Make a file src/environments/firebase.ts and add your firebase credentials in that file:-
 
-  `export const firebase = {your credentials}`
+  ```ts
+    export const firebase = {your credentials}
+  ```
 
 #### Setup Firebase Functions and Firestore rules:-
 
@@ -31,11 +35,15 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 
 - Make a file firebase/.firebaserc and add the following and replace your-project-name with your project name:-
 
-  `{"projects": {"default": "your-project-name"}}`
+  ```json
+  { "projects": { "default": "your-project-name" } }
+  ```
 
 - Deploy Your Firebase Functions and Firestore Rules.
 
-  `firebase deploy`
+  ```bash
+    firebase deploy
+  ```
 
 #### Test Your Project :-
 
