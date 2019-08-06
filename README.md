@@ -13,6 +13,7 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 - Install Firebase Depndencies
 
   `cd firebase/functions`
+
   `npm install`
 
 #### Step Up Firebase Related Stuff:-
