@@ -12,7 +12,7 @@ This is a accounting web app that can serve the purpose of tally. This is develo
 
 - Install Firebase Depndencies
 
-  ```
+  ```bash
     cd firebase/functions
     npm install
   ```
