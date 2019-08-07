@@ -1,4 +1,4 @@
-This is a accounting web app that can serve the purpose of tally. This is developed with angular and firebase. [View Demo]({{url}}){:"target"="\_blank"}
+This is a accounting web app that can serve the purpose of tally. This is developed with angular and firebase. [View Demo]({{site.url}}){:target="\_blank"}
 
 ## Get Started
 
