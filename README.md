@@ -1,5 +1,3 @@
-# TallyClone
-
 This is a accounting web app that can serve the purpose of tally. This is developed with angular and firebase.
 
 ## Get Started
