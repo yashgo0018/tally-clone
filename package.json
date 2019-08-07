@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod=true --outputPath=firebase/public",
+    "deploy:firebase": "cd firebase && firebase deploy --only functions, firestore",
     "deploy": "npm rum build && cd firebase && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
