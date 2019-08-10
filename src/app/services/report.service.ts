@@ -14,7 +14,12 @@ export class ReportService {
       x: transactions.map(val =>
         val.type === 'Sale' ? val.total : -val.total
       ),
-      y: transactions.map(val => val.date),
+      saleY: transactions
+        .filter(val => val.type === 'Sale')
+        .map(val => new Date(val.date.seconds * 1000)),
+      purchaseY: transactions
+        .filter(val => val.type === 'Purchase')
+        .map(val => new Date(val.date.seconds * 1000)),
       sale: sum(
         transactions.filter(val => val.type === 'Sale').map(val => val.total)
       ),
@@ -25,9 +30,16 @@ export class ReportService {
       ),
       profit: sum(
         transactions.map(val => (val.type === 'Sale' ? val.total : -val.total))
-      )
+      ),
+      saleChartData: transactions
+        .filter(val => val.type === 'Sale')
+        .map(val => val.total),
+      purchaseChartData: transactions
+        .filter(val => val.type === 'Purchase')
+        .map(val => val.total)
     };
     console.log(data);
+
     return data;
   }
 }

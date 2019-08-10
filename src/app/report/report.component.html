@@ -42,5 +42,89 @@
     >
   </li>
 </ul>
-
-{{ this.reportService.getAnalytics(this.periods[mode]).profit }}
+<div *ngIf="transactionService.transactions != undefined">
+  <div class="row my-4">
+    <div class="col-md-4">
+      <table class="table table-dark table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="2">Analytics Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Total Sale</th>
+            <td>{{ data.sale }}</td>
+          </tr>
+          <tr>
+            <th>Total Purchase</th>
+            <td>{{ data.purchase }}</td>
+          </tr>
+          <tr>
+            <th>Total Profit</th>
+            <td>{{ data.profit }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <canvas
+        baseChart
+        chartType="pie"
+        [labels]="['purchase', 'sale']"
+        [data]="[data.purchase, data.sale]"
+      ></canvas>
+    </div>
+  </div>
+  <div class="row my-4">
+    <canvas
+      class="col-md-6"
+      baseChart
+      chartType="line"
+      [datasets]="[{ data: data.saleChartData, label: 'Sale' }]"
+      [labels]="data.saleY"
+      [options]="{
+        scales: {
+          xAxes: [
+            {
+              type: 'time'
+            }
+          ]
+        },
+        elements: {
+          line: {
+            tension: 0.2,
+            fill: false
+          }
+        }
+      }"
+    >
+    </canvas>
+    <canvas
+      class="col-md-6"
+      baseChart
+      chartType="line"
+      [datasets]="[{ data: data.purchaseChartData, label: 'Purchase' }]"
+      [labels]="data.purchaseY"
+      [options]="{
+        scales: {
+          xAxes: [
+            {
+              type: 'time'
+            }
+          ]
+        },
+        elements: {
+          line: {
+            tension: 0.2,
+            fill: false
+          },
+          border: {
+            color: 'rgb(0, 0, 0)'
+          }
+        }
+      }"
+    >
+    </canvas>
+  </div>
+</div>

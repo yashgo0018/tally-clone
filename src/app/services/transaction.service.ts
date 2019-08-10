@@ -50,8 +50,8 @@ export class TransactionService {
   }
 
   transactionAfter(timestamp: Date) {
-    return this.transactions.filter(
-      val => val.date.seconds > timestamp.getTime() / 1000
-    );
+    return this.transactions
+      .filter(val => val.date.seconds > timestamp.getTime() / 1000)
+      .sort((a, b) => a.date.seconds - b.date.seconds);
   }
 }

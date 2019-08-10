@@ -19,7 +19,7 @@ import { TransactionListComponent } from './transaction/list/list.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -54,7 +54,8 @@ import { ReportComponent } from './report/report.component';
     BrowserAnimationsModule,
     FormsModule,
     ToastrModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartsModule
   ],
   providers: [ContactService, ProductService, TransactionService],
   bootstrap: [AppComponent]

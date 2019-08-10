@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { TransactionService } from '../services/transaction.service';
+import { Timestamp } from '../model/timestamp.model';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-report',
@@ -10,7 +12,8 @@ import { TransactionService } from '../services/transaction.service';
 export class ReportComponent implements OnInit {
   mode = 1;
   periods = {};
-
+  data: any;
+  y: Timestamp[];
   constructor(
     public reportService: ReportService,
     public transactionService: TransactionService
@@ -41,10 +44,25 @@ export class ReportComponent implements OnInit {
       date.getMonth(),
       date.getDate()
     );
-    console.log(this.transactionService.transactionAfter(this.periods[5]));
+    const interval = setInterval(() => {
+      if (this.data != null) {
+        clearInterval(interval);
+        return;
+      }
+      if (this.transactionService.transactions == null) {
+        return;
+      }
+      this.generateChart();
+      console.log('heloo');
+    }, 0.1);
   }
 
   changeMode(mode: number) {
     this.mode = mode;
+    this.generateChart();
+  }
+
+  generateChart() {
+    this.data = this.reportService.getAnalytics(this.periods[this.mode]);
   }
 }
