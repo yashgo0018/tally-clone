@@ -1,0 +1,8 @@
+<div [class]="classes">
+  <a
+    class="btn btn-block btn-success text-light text-bold"
+    (click)="authService.googleSignIn()"
+    >Sign In with <img src="assets/google-logo.png" width="30px"
+  /></a>
+  {{ authService.isLoggedIn }}
+</div>

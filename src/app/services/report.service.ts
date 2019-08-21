@@ -38,7 +38,6 @@ export class ReportService {
         .filter(val => val.type === 'Purchase')
         .map(val => val.total)
     };
-    console.log(data);
 
     return data;
   }

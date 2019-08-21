@@ -1,0 +1,55 @@
+<app-authentication heading="Sign Up">
+  <div form>
+    <form action="#" method="post">
+      <div class="form-left-to-w3l">
+        <span class="fa fa-user-o" aria-hidden="true"></span>
+        <input type="text" name="Name" placeholder=" Name" required="" />
+
+        <div class="clear"></div>
+      </div>
+      <div class="form-left-to-w3l">
+        <span class="fa fa-phone" aria-hidden="true"></span>
+        <input type="text" name="Phone" placeholder="Phone" required="" />
+
+        <div class="clear"></div>
+      </div>
+      <div class="form-left-to-w3l">
+        <span class="fa fa-envelope-o" aria-hidden="true"></span>
+        <input type="email" name="email" placeholder="Email" required="" />
+
+        <div class="clear"></div>
+      </div>
+      <div class="form-left-to-w3l ">
+        <span class="fa fa-lock" aria-hidden="true"></span>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required=""
+        />
+        <div class="clear"></div>
+      </div>
+      <div class="form-group ml-4 text-left">
+        <input type="checkbox" id="remember-me" class="form-check-input" />
+        <label for="remember-me" class="form-check-label">Remember me </label>
+      </div>
+      <div class="form-group mx-3 mb-2 mt-3">
+        <a
+          class="btn btn-block btn-warning text-light"
+          (click)="auth.googleSignIn()"
+          >Sign Up</a
+        >
+      </div>
+
+      <app-google-login-button
+        classes="form-group mx-3 mb-3"
+      ></app-google-login-button>
+    </form>
+    <div class="w3layouts_more-buttn">
+      <h3>
+        Already Have An Account..?
+        <a [routerLink]="['/login']">Sign In</a>
+      </h3>
+    </div>
+  </div>
+</app-authentication>

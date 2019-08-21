@@ -10,4 +10,5 @@ export class Transaction {
   type: string;
   total: number;
   date?: Timestamp;
+  userId?: string;
 }

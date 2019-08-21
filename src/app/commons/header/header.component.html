@@ -10,4 +10,16 @@
     />
     Tally Clone
   </a>
+
+  <ul class="nav">
+    <li *ngIf="!authService.isLoggedIn">
+      <a class="nav-link" [routerLink]="['/login']">Sign In</a>
+    </li>
+    <li *ngIf="!authService.isLoggedIn">
+      <a class="nav-link" [routerLink]="['/register']">Sign Up</a>
+    </li>
+    <li *ngIf="authService.isLoggedIn">
+      <a class="nav-link" (click)="authService.signOut()" href="#">Logout</a>
+    </li>
+  </ul>
 </nav>

@@ -14,7 +14,6 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
-    console.log(this.service.formData);
   }
   resetForm(form?: NgForm) {
     if (form) {
@@ -36,7 +35,7 @@ export class AddComponent implements OnInit {
 
     this.service
       .writeContact(this.service.formData)
-      .then(val => {
+      .then(() => {
         this.resetForm();
         this.toastr.success('Submitted Successfully.');
       })

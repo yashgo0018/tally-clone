@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { TransactionService } from '../services/transaction.service';
 import { Timestamp } from '../model/timestamp.model';
-import { timeout } from 'q';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-report',
@@ -16,10 +17,17 @@ export class ReportComponent implements OnInit {
   y: Timestamp[];
   constructor(
     public reportService: ReportService,
-    public transactionService: TransactionService
+    public transactionService: TransactionService,
+    private router: Router,
+    private authService: AngularFireAuth
   ) {}
 
   ngOnInit() {
+    this.authService.authState.subscribe(user => {
+      if (user == null) {
+        this.router.navigate(['/login']);
+      }
+    });
     const date = new Date();
     const last7thday = date.getDate() - date.getDay();
     const lastWeek = date.getDate() - 7;
@@ -53,7 +61,6 @@ export class ReportComponent implements OnInit {
         return;
       }
       this.generateChart();
-      console.log('heloo');
     }, 0.1);
   }
 

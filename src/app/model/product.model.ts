@@ -3,4 +3,5 @@ export class Product {
   name: string;
   quantity: number;
   cost?: number;
+  userId?: string;
 }

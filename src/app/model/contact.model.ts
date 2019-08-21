@@ -5,4 +5,5 @@ export class Contact {
   mobile?: string;
   email?: string;
   address?: Array<string>;
+  userId?: string;
 }

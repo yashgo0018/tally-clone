@@ -3,6 +3,8 @@ import { Transaction } from '../model/transaction.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductService } from './product.service';
 import { Product } from '../model/product.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +16,33 @@ export class TransactionService {
 
   constructor(
     private firestore: AngularFirestore,
-    private productService: ProductService
+    private productService: ProductService,
+    private auth: AngularFireAuth,
+    private authService: AuthService
   ) {
-    this.getTransactions().subscribe(actionArray => {
-      this.transactions = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
-        } as Transaction;
-      });
-      this.purchases = this.transactions.filter(val => val.type === 'Purchase');
+    this.auth.authState.subscribe(user => {
+      if (user != null) {
+        this.getTransactions().subscribe(actionArray => {
+          this.transactions = actionArray.map(item => {
+            return {
+              id: item.payload.doc.id,
+              ...item.payload.doc.data()
+            } as Transaction;
+          });
+          this.purchases = this.transactions.filter(
+            val => val.type === 'Purchase'
+          );
+        });
+      }
     });
   }
 
   getTransactions() {
-    return this.firestore.collection('transaction').snapshotChanges();
+    return this.firestore
+      .collection('transaction', ref =>
+        ref.where('userId', '==', this.authService.user.uid)
+      )
+      .snapshotChanges();
   }
 
   getTransaction(id: string) {
@@ -36,16 +50,28 @@ export class TransactionService {
   }
 
   deleteTransaction(id: string) {
-    this.firestore.doc(`transaction/${id}`).delete();
+    if (
+      this.authService.isLoggedIn &&
+      this.getTransaction(id).userId === this.authService.user.uid
+    ) {
+      this.firestore.doc(`transaction/${id}`).delete();
+    }
   }
 
-  async writeTransaction(transaction: Transaction) {
-    const data = Object.assign({}, transaction);
-    delete data.id;
-    if (transaction.id == null || transaction.id === '') {
-      return this.firestore.collection('transaction').add(data);
+  writeTransaction(transaction: Transaction): Promise<any> {
+    if (this.authService.isLoggedIn) {
+      transaction.userId = this.authService.user.uid;
+      const data = Object.assign({}, transaction);
+      delete data.id;
+      if (transaction.id == null || transaction.id === '') {
+        return this.firestore.collection('transaction').add(data);
+      } else {
+        return this.firestore.doc(`transaction/${transaction.id}`).update(data);
+      }
     } else {
-      return this.firestore.doc(`transaction/${transaction.id}`).update(data);
+      return new Promise((resolve, reject) => {
+        reject('Not Authenticated');
+      });
     }
   }
 

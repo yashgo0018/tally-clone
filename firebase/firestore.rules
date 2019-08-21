@@ -2,22 +2,30 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /transaction/{id} {
-    	allow read;
-      allow create, update: if checkTransaction(request.resource.data);
-      allow delete;
+   	 	allow read, delete: if checkUser(resource.data.userId);
+      allow create: if checkUser(request.resource.data.userId);
+      allow update: if checkTransaction(request.resource.data) && checkUser(resource.data.userId);
     }
     
     match /product/{id} {
-    	allow read;
-      allow delete;
-      allow create, update: if checkProduct(request.resource.data);
+   	 	allow read, delete: if checkUser(resource.data.userId);
+      allow create: if checkUser(request.resource.data.userId);
+      allow update: if checkProduct(request.resource.data) && checkUser(resource.data.userId);
     }
     
     match /contact/{id} {
-   	 	allow read;
-      allow delete;
-      allow create, update: if checkContact(request.resource.data);
+   	 	allow read, delete: if checkUser(resource.data.userId);
+      allow create: if checkUser(request.resource.data.userId);
+      allow update: if checkContact(request.resource.data) && checkUser(resource.data.userId);
     }
+
+    match /user/{id} {
+      allow read, write: if checkUser(id);
+    }
+  }
+
+  function checkUser(userId) {
+    return request.auth.uid == userId && request.auth != null;
   }
   
   function checkTransaction(data){

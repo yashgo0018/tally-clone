@@ -8,6 +8,7 @@ import { ContactService } from 'src/app/services/contact.service';
 import { ProductService } from 'src/app/services/product.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Product } from 'src/app/model/product.model';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-transaction-add',
@@ -24,10 +25,16 @@ export class TransactionAddComponent implements OnInit, OnDestroy {
     public transactionService: TransactionService,
     public contactService: ContactService,
     public toastrService: ToastrService,
-    public router: Router
+    public router: Router,
+    private authService: AngularFireAuth
   ) {}
 
   ngOnInit() {
+    this.authService.authState.subscribe(user => {
+      if (user == null) {
+        this.router.navigate(['/login']);
+      }
+    });
     this.role = this.router.url.split('/')[1] === 'sell' ? 'Buyer' : 'Seller';
     this.type = this.role === 'Seller' ? 'Purchase' : 'Sale';
     if (this.transactionService.formData === undefined) {
